@@ -1,0 +1,54 @@
+<div class="header1">
+    <b style="font-size: medium; color: white;">My Bookings</b>
+  </div>
+  
+  <div style="margin-top: 200px;"></div>
+  <div style="text-align: center;">
+    <div style="width: 500px; margin: 0 auto; background: white; color: #000;">    
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <h6>Login</h6>
+              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" 
+                 novalidate>
+                <div class="form-group">
+                  <!-- <label for="firstName"></label> -->
+                  <input type="email" class="form-control" name="email"
+                   [(ngModel)]="model.email" 
+                   #email="ngModel" 
+                   [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" 
+                   [ngModelOptions]="{standalone: true}"
+                   email required />
+                   <div *ngIf="InvalidEmail" style="color:red;font-size: small;">Email not valid</div>
+                   <div *ngIf="f.submitted && email.invalid " class="invalid-feedback">
+                    <div *ngIf="email.errors.required">Email is required</div>
+                  </div>
+                  
+                </div>
+  
+                <div class="form-group">
+  
+                  <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                  <div *ngIf="InvalidPassword" style="color:red;font-size: small;">Password not valid</div>
+                  <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    
+                    <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <button style="background-color: orange;width: 250px;border-radius: 5px;">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      
+    </div>
+  </div> 
+  
+  

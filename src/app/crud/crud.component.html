@@ -1,0 +1,360 @@
+<div class="header">
+    <b style="font-size: medium; color: white;">My Bookings</b>
+    <div class="pull-right">
+      <span style="color:white ; font-size: medium;"> Employee </span>
+      <span style="padding-left: 30rem;"></span>
+      <span class="glyphicon glyphicon-bell"></span> 
+      <span style="padding-left: 30px;"></span>
+      <span class="glyphicon glyphicon-user"></span> 
+    </div>  
+
+  </div>
+
+<div class="AddEmployeeTitleContainer">
+    <!-- <p class="pull-left"> Employee Data</p>
+    <div class="addEmployeeTitleContainer">
+       <p class="pull-left"> Employee Data</p>
+    </div> -->
+    <div class="addEmployeeBtnContainer">
+
+        <p class="pull-left"> 
+            <span>
+              <b>Employee Data</b></span>
+        </p>
+      <div class="addNewEmployeeBtn" (click)="addNewEmployeeBtn()" data-toggle="modal" data-target="#myModal"> Add
+        Employee</div>
+    </div>
+  </div>
+  
+  <!-- Add form -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">ADD EMPLOYEE FORM</h4>
+        </div>
+        <div class="modal-body">
+          <div class="formWrapper">
+            <form>
+              <!-- <div class="form-group name">
+          
+          <input type="text"
+                 class="form-control input"
+                 id="name"
+                 name="name"
+                 [(ngModel)]="model.name"
+                 placeholder="Name">
+        </div>
+      
+         <div class="form-group position">
+       
+          <input type="text"
+                 class="form-control positionInput"
+                 id="position"
+                 name="position"
+                 [(ngModel)]="model.position"
+                 placeholder="Position">
+        </div> -->
+  
+              <!-- new -->
+              <div class="form-group name">
+                <!-- <label for="name">Name:</label> -->
+                <input type="text" class="form-control input" id="fname" name="fname" [(ngModel)]="model.fname"
+                  placeholder="fname">
+              </div>
+  
+              <div class="form-group position">
+                <!-- <label for="position">Position:</label> -->
+                <input type="text" class="form-control input" id="lname" name="lname" [(ngModel)]="model.lname"
+                  placeholder="lname">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="id" name="id" [(ngModel)]="model.id" placeholder="id">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="gender" name="gender" [(ngModel)]="model.gender"
+                  placeholder="gender">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="grade" name="grade" [(ngModel)]="model.grade"
+                  placeholder="grade">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="ODC" name="ODC" [(ngModel)]="model.ODC"
+                  placeholder="ODC">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="BU" name="BU" [(ngModel)]="model.BU" placeholder="BU">
+              </div>
+  
+              <div class="form-group position">
+                <input type="text" class="form-control input" id="project" name="project" [(ngModel)]="model.project"
+                  placeholder="project">
+              </div>
+  
+              <div class="submitBtnContainer">
+                <button type="submit" class="saveBtn" (click)="addEmployee()">SAVE</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add form END-->
+  
+  
+  <!-- edit form-->
+  
+  <div *ngIf="tableView">
+  <div class="tableWrapper">
+    <div class="containerTitle">
+      <div class="oneTitle">First Name</div>
+      <div class="twoTitle">Last Name</div>
+      <div class="threeTitle">Id</div>
+      <div class="threeTitle">Gender</div>
+      <div class="threeTitle">Grade</div>
+      <div class="threeTitle">ODC/NON ODC</div>
+      <div class="threeTitle">BU</div>
+      <div class="threeTitle">Project</div>
+      <div class="threeTitle">Actions</div>
+  
+      <!-- <div class="four"></div> -->
+    </div>
+  
+    <div class="containerListItems" *ngFor="let employee of employees; let i = index"
+      >
+      <div class="one">{{employee.fname}}</div>
+      <div class="two">{{employee.lname}}</div>
+      <div class="two">{{employee.id}}</div>
+      <div class="two">{{employee.gender}}</div>
+      <div class="two">{{employee.grade}}</div>
+      <div class="two">{{employee.ODC}}</div>
+      <div class="two">{{employee.BU}}</div>
+      <div class="two">{{employee.project}}</div>
+      <div class="three">
+        <button (click)="viewEmployee(i)" data-toggle="modal" data-target="#myModalView">View</button>
+        <button (click)="editEmployee(i)" data-toggle="modal" data-target="#myModalEdit">Edit</button>
+        <button (click)="deleteEmployee(i)">Delete</button>
+
+        <!-- <button style="width:5%;height:100%">
+            <div style="width: 5px;
+                height: 5px;
+                background: black;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;"></div>
+                <p style="padding-left:1px"></p>
+                <div style="width: 5px;
+                height: 5px;
+                background: black;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;"></div>
+                <p style="padding-left:0.1px"></p>
+                <div style="width: 5px;
+                height: 5px;
+                background: black;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;"></div>
+                </button> -->
+      </div>
+      <!-- <div class="four"></div> -->
+    </div>
+  </div>
+</div>
+  
+<div *ngIf="dataAvailable">
+    <div style="margin-top:300px"></div>
+    <div style="text-align: center;">
+        <div style="width: 500px; margin: 0 auto; background: white; color: #000;">
+            <p>No Employee Data available</p>
+        </div>
+    </div>
+</div>
+  
+  <!-- Edit form pop up -->
+  <div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">EDIT EMPLOYEE FORM</h4>
+        </div>
+        <div class="modal-body">
+          <div class="editEmployeeTitleContainer">
+            <div class="">Edit Employee</div>
+          </div>
+  
+          <form>
+            <div class="form-group name">
+              <!-- <label for="name">Name:</label> -->
+              <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="model2.fname"
+                placeholder="fname">
+            </div>
+  
+            <div class="form-group position">
+              <!-- <label for="position">Position:</label> -->
+              <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="model2.lname"
+                placeholder="lname">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="id" name="id" [(ngModel)]="model2.id" placeholder="id">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="gender" name="gender" [(ngModel)]="model2.gender"
+                placeholder="gender">
+            </div>
+
+            <div class="form-group position">
+                <input type="text" class="form-control" id="grade" name="grade" [(ngModel)]="model2.grade"
+                  placeholder="grade">
+              </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="ODC" name="ODC" [(ngModel)]="model2.ODC" placeholder="ODC">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="BU" name="BU" [(ngModel)]="model2.BU" placeholder="BU">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="project" name="project" [(ngModel)]="model2.project"
+                placeholder="project">
+            </div>
+  
+            <button type="submit" (click)="updateEmployee()">Update</button>
+          </form>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+   
+  </div>
+
+   <!-- View form data-->
+   <div id="myModalView" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">VIEW EMPLOYEE FORM</h4>
+        </div>
+        <div class="modal-body">
+  
+          <div class="editEmployeeTitleContainer">
+            <div class="">view Employee</div>
+          </div>
+  
+          <form>
+            <div class="form-group name">
+              <!-- <label for="name">Name:</label> -->
+              <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="model2.fname"
+                placeholder="fname">
+            </div>
+  
+            <div class="form-group position">
+              <!-- <label for="position">Position:</label> -->
+              <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="model2.lname"
+                placeholder="lname">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="id" name="id" [(ngModel)]="model2.id" placeholder="id">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="gender" name="gender" [(ngModel)]="model2.gender"
+                placeholder="gender">
+            </div>
+
+            <div class="form-group position">
+                <input type="text" class="form-control" id="grade" name="grade" [(ngModel)]="model2.grade"
+                  placeholder="grade">
+              </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="ODC" name="ODC" [(ngModel)]="model2.ODC" placeholder="ODC">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="BU" name="BU" [(ngModel)]="model2.BU" placeholder="BU">
+            </div>
+  
+            <div class="form-group position">
+              <input type="text" class="form-control" id="project" name="project" [(ngModel)]="model2.project"
+                placeholder="project">
+            </div>
+
+          </form>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+   </div>
+<!-- 
+   <ngb-pagination [pageSize] = "25" [collectionSize]="100"  aria-label="Default pagination">
+
+   </ngb-pagination> -->
+
+<!-- Delete -->
+   <div id="myModalDelete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+  
+          
+        </div>
+        <div class="modal-footer">
+         
+          <button type="button" 
+          class="btn btn-default"
+           data-dismiss="modal">
+            Close
+          </button>
+        
+        </div>
+      </div>
+    </div>
+   </div>
