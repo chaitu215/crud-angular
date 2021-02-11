@@ -32,10 +32,11 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
+          <h4 class="modal-title" style="float:center">ADD EMPLOYEE FORM</h4>
           <button type="button" class="close" data-dismiss="modal">
             &times;
           </button>
-          <h4 class="modal-title">ADD EMPLOYEE FORM</h4>
+
         </div>
         <div class="modal-body">
           <div class="formWrapper">
@@ -63,18 +64,32 @@
               <!-- new -->
               <div class="form-group name">
                 <!-- <label for="name">Name:</label> -->
-                <input type="text" class="form-control input" id="fname" name="fname" [(ngModel)]="model.fname"
-                  placeholder="fname">
+                <input type="text" 
+                class="form-control input" 
+                id="fname" name="fname" 
+                [(ngModel)]="model.fname"
+                  placeholder="fname" required>
+                  <div *ngIf="fnameCheck">
+                    <span style="color:red"> First name is mandatory</span>
+                 </div> 
               </div>
   
               <div class="form-group position">
                 <!-- <label for="position">Position:</label> -->
                 <input type="text" class="form-control input" id="lname" name="lname" [(ngModel)]="model.lname"
-                  placeholder="lname">
+                  placeholder="lname" required>
+                  <div *ngIf="lnameCheck">
+                    <span style="color:red"> Last name is mandatory</span>
+                 </div> 
               </div>
   
               <div class="form-group position">
-                <input type="text" class="form-control input" id="id" name="id" [(ngModel)]="model.id" placeholder="id">
+                <input type="text" class="form-control input"
+                 id="id" name="id" [(ngModel)]="model.id"
+                  placeholder="id" required>
+                 <div *ngIf="idCheck">
+                    <span style="color:red"> Id is mandatory</span>
+                 </div> 
               </div>
   
               <div class="form-group position">
@@ -84,7 +99,10 @@
   
               <div class="form-group position">
                 <input type="text" class="form-control input" id="grade" name="grade" [(ngModel)]="model.grade"
-                  placeholder="grade">
+                  placeholder="grade" required>
+                  <div *ngIf="gradeCheck">
+                    <span style="color:red"> Grade is mandatory</span>
+                 </div> 
               </div>
   
               <div class="form-group position">
@@ -108,7 +126,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">
+          <button type="button" class="btn btn-default" 
+          data-dismiss="modal">
             Close
           </button>
         </div>
@@ -145,37 +164,52 @@
       <div class="two">{{employee.grade}}</div>
       <div class="two">{{employee.ODC}}</div>
       <div class="two">{{employee.BU}}</div>
-      <div class="two">{{employee.project}}</div>
+      <div class="two">{{employee.project}}
+      </div>
       <div class="three">
-        <button (click)="viewEmployee(i)" data-toggle="modal" data-target="#myModalView">View</button>
-        <button (click)="editEmployee(i)" data-toggle="modal" data-target="#myModalEdit">Edit</button>
-        <button (click)="deleteEmployee(i)">Delete</button>
 
-        <!-- <button style="width:5%;height:100%">
-            <div style="width: 5px;
-                height: 5px;
-                background: black;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;"></div>
-                <p style="padding-left:1px"></p>
-                <div style="width: 5px;
-                height: 5px;
-                background: black;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;"></div>
-                <p style="padding-left:0.1px"></p>
-                <div style="width: 5px;
-                height: 5px;
-                background: black;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;"></div>
-                </button> -->
+          <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+              :
+            </button> 
+           
+            <div class="dropdown-menu">
+              <a class="dropdown-item" >
+                <span (click)="viewEmployee(i)" data-toggle="modal" data-target="#myModalView">View</span>
+              </a>
+              <a class="dropdown-item">
+                <span (click)="editEmployee(i)" data-toggle="modal" data-target="#myModalEdit">Edit</span>
+              </a>
+              <a class="dropdown-item" >
+                <span  data-toggle="modal" data-target="#myModalDeletee">Delete</span>
+              </a>
+            </div>
+          </div>       
       </div>
       <!-- <div class="four"></div> -->
     </div>
+    
+    <div  class="modal" tabindex="-1" role="dialog" id="myModalDeletee" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         
+          <div class="modal-body" >
+            <p>Are you sure you want to delete <span></span>, this action cannot be done </p>
+          </div>
+            <div class="modal-footer" *ngFor="let employee of employees; let i = index">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" (click)="deleteConfirm(i)">Yes</button>
+            </div>     
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
   
@@ -344,7 +378,7 @@
         </div>
         <div class="modal-body">
   
-          
+            <button>Close</button>
         </div>
         <div class="modal-footer">
          
@@ -358,3 +392,4 @@
       </div>
     </div>
    </div>
+

@@ -21,8 +21,9 @@ export class CrudComponent implements OnInit {
   employees = []
   
   color;
-
-  constructor() { }
+  public fnameInfo:any;
+  
+  constructor() { this.fnameInfo = ""}
 
   ngOnInit() {
     if(this.employees.length > 0){
@@ -39,23 +40,58 @@ export class CrudComponent implements OnInit {
 
   model: any = {};
   model2: any = {}; 
-
+  idCheck : boolean = false;
+  fnameCheck : boolean = false;
+  lnameCheck : boolean = false;
+  gradeCheck : boolean = false;
+ 
+  
   addEmployee() {
-    this.employees.push(this.model);
+
+    if(this.model.fname !== undefined && 
+    this.model.lname !== undefined  &&
+    this.model.id !== undefined &&
+    this.model.grade !== undefined 
+    ){
+      this.fnameCheck = false
+      this.lnameCheck = false
+      this.idCheck = false
+      this.gradeCheck = false
+      this.employees.push(this.model);
+    } else{
+      if(this.model.fname !== ""){
+        this.fnameCheck = true
+      }
+      if(this.model.lname !== ""){
+        this.lnameCheck = true
+      }
+      if(this.model.id !== ""){
+        this.idCheck = true
+      }
+      if(this.model.grade !== ""){
+        this.gradeCheck = true
+      }
+      alert('please enter mandatory fields')
+    }
     
     if(this.employees.length > 0){
       this.tableView = true  
       this.dataAvailable = false
-    }
-    
+    }    
     this.model = {};
   }
 
   deleteEmployee(i) {
     this.employees.splice(i);
-    console.log(i);
   }
 
+  deleteConfirm(i){
+    this.employees.splice(i)
+  }
+
+  
+  // Close the dropdown if the user clicks outside of it
+ 
   myValue;
 
   editEmployee(editEmployeeInfo) {
